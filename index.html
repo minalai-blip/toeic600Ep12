@@ -128,69 +128,118 @@
             
             <div><span class="retry-link" onclick="initQuiz()">↺ 再練一次這組單字</span></div>
 
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdNkem-vuwWTDc5eEfhv4FlqpubNv7dsoY0uFQEcv4c5rCtyg/viewform?usp=header" class="cta-button" target="_blank">前往👉實戰驗收：📝多益模擬題型</a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdNkem-vuwWTDc5eEfhv4FlqpubNv7dsoY0uFQEcv4c5rCtyg/viewform?usp=header" class="cta-button" target="_blank">前往👉下一關:中階情境演練</a>
 
             <div class="footer-upsell">
-                💡 這套「直覺單字+實戰刷題」模式很有效吧!完整多益衝刺計畫已在蝦皮上架。<br>
-                <a href="https://shopee.tw/YOUR_LINK" class="shopee-link" target="_blank">點此前往蝦皮賣場看更多</a>
+                這套「單字直覺」練習模式很有效吧!完整多益衝刺計畫已上架。<br>
+                <a href="https://shopee.tw/YOUR_LINK" class="shopee-link" target="_blank">點此前往看更多</a>
             </div>
         </div>
     </div>
 </div>
 
 <script>
-// EP12 核心資料庫：無首字母提示純挖空
+// EP12 核心資料庫 (276 - 300 共 25 字，正誤答案交互設計，誘答中文均取材自本集清單)
 const rawData = [
-    { type: "單字辨析", word: "pay on a monthly <u><b>basis</b></u>", show: "基準、根據", ans: true, feedback: "basis 是「基準、根據」。" },
-    { type: "句型搭配", word: "basis", show: "pay on a monthly ______ / 填入：basis", ans: true, feedback: "應填入 basis。" },
-    { type: "單字辨析", word: "build a sports <u><b>complex</b></u>", show: "複雜的（形容詞）", ans: false, feedback: "在此作名詞，指「綜合設施、綜合建築」。" },
-    { type: "句型搭配", word: "complex", show: "build a sports ______ / 填入：preparation", ans: false, feedback: "應填入 complex。" },
-    { type: "單字辨析", word: "The team was <u><b>delighted</b></u> to win the award.", show: "高興的", ans: true, feedback: "delighted 是「高興的」。" },
-    { type: "句型搭配", word: "delighted", show: "The team was ______ to win the award. / 填入：delighted", ans: true, feedback: "應填入 delighted。" },
-    { type: "單字辨析", word: "<u><b>obtain</b></u> data from the website", show: "遺失", ans: false, feedback: "obtain 是「獲得、取得」。" },
-    { type: "句型搭配", word: "obtain", show: "______ data from the website / 填入：obtain", ans: true, feedback: "應填入 obtain。" },
-    { type: "單字辨析", word: "<u><b>honor</b></u> outstanding employees", show: "表揚、致敬", ans: true, feedback: "honor 是「表揚、致敬」。" },
-    { type: "句型搭配", word: "honor", show: "______ outstanding employees / 填入：hesitate", ans: false, feedback: "應填入 honor。" },
-    { type: "單字辨析", word: "<u><b>properly</b></u> handle customer complaints", show: "適當地", ans: true, feedback: "properly 是「適當地」。" },
-    { type: "句型搭配", word: "properly", show: "______ handle customer complaints / 填入：properly", ans: true, feedback: "應填入 properly。" },
-    { type: "單字辨析", word: "<u><b>suitable</b></u> for long-distance travel", show: "不合適的", ans: false, feedback: "suitable 是「合適的」。" },
-    { type: "句型搭配", word: "suitable", show: "______ for long-distance travel / 填入：suitable", ans: true, feedback: "應填入 suitable。" },
-    { type: "單字辨析", word: "<u><b>electronic</b></u> payment systems", show: "電子(化)的", ans: true, feedback: "electronic 是「電子(化)的」。" },
-    { type: "句型搭配", word: "electronic", show: "______ payment systems / 填入：automobile", ans: false, feedback: "應填入 electronic。" },
-    { type: "單字辨析", word: "<u><b>finalize</b></u> a contract", show: "敲定、使定案", ans: true, feedback: "finalize 是「定案、敲定」。" },
-    { type: "句型搭配", word: "finalize", show: "______ a contract / 填入：finalize", ans: true, feedback: "應填入 finalize。" },
-    { type: "單字辨析", word: "make a <u><b>generous</b></u> donation to a charity", show: "吝嗇的", ans: false, feedback: "generous 是「慷慨大方的」。" },
-    { type: "句型搭配", word: "generous", show: "make a ______ donation to a charity / 填入：generous", ans: true, feedback: "應填入 generous。" },
-    { type: "單字辨析", word: "in <u><b>preparation</b></u> for the annual meeting", show: "準備", ans: true, feedback: "preparation 是「準備」。" },
-    { type: "句型搭配", word: "preparation", show: "in ______ for the annual meeting / 填入：basis", ans: false, feedback: "應填入 preparation。" },
-    { type: "單字辨析", word: "the main <u><b>duties</b></u> of a manager", show: "職責、職務", ans: true, feedback: "duty 的複數形為 duties，指「職責」。" },
-    { type: "句型搭配", word: "duty", show: "the main ______ of a manager / 填入：duties", ans: true, feedback: "應填入 duties。" },
-    { type: "單字辨析", word: "<u><b>earn</b></u> customer trust", show: "失去", ans: false, feedback: "earn 是「掙得、搏得、贏得」。" },
-    { type: "句型搭配", word: "earn", show: "______ customer trust / 填入：earn", ans: true, feedback: "應填入 earn。" },
-    { type: "單字辨析", word: "Are you <u><b>willing</b></u> to relocate for the job?", show: "願意的", ans: true, feedback: "willing 是「願意的」。" },
-    { type: "句型搭配", word: "willing", show: "Are you ______ to relocate for the job? / 填入：involved", ans: false, feedback: "應填入 willing。" },
-    { type: "單字辨析", word: "The movie is <u><b>worth</b></u> watching.", show: "值得...的", ans: true, feedback: "worth 是「值得...的」，後面常接 V-ing。" },
-    { type: "句型搭配", word: "worth", show: "The movie is ______ watching. / 填入：worth", ans: true, feedback: "應填入 worth。" },
-    { type: "單字辨析", word: "a project <u><b>funded</b></u> by the government", show: "被政府資助的", ans: true, feedback: "fund 作動詞指「出資、資助」。" },
-    { type: "句型搭配", word: "fund", show: "a project ______ by the government / 填入：shortly", ans: false, feedback: "應填入 funded。" },
-    { type: "單字辨析", word: "free <u><b>overnight</b></u> delivery", show: "慢速的", ans: false, feedback: "overnight 是「一夜的;隔日的」。" },
-    { type: "句型搭配", word: "overnight", show: "free ______ delivery / 填入：overnight", ans: true, feedback: "應填入 overnight。" },
-    { type: "單字辨析", word: "<u><b>particularly</b></u> focus on customer needs", show: "特別、尤其", ans: true, feedback: "particularly 是「特別、尤其」。" },
-    { type: "句型搭配", word: "particularly", show: "______ focus on customer needs / 填入：properly", ans: false, feedback: "應填入 particularly。" },
-    { type: "單字辨析", word: "every <u><b>aspect</b></u> of a project", show: "方面、面向", ans: true, feedback: "aspect 是「方面、面向」。" },
-    { type: "句型搭配", word: "aspect", show: "every ______ of a project / 填入：aspect", ans: true, feedback: "應填入 aspect。" },
-    { type: "單字辨析", word: "Please do not <u><b>hesitate</b></u> to contact us.", show: "立即、不要等", ans: false, feedback: "hesitate 是「猶豫」，do not hesitate 意為「請不要猶豫」。" },
-    { type: "句型搭配", word: "hesitate", show: "Please do not ______ to contact us. / 填入：hesitate", ans: true, feedback: "應填入 hesitate。" },
-    { type: "單字辨析", word: "I was <u><b>involved</b></u> in the training program.", show: "參與的、涉及其中的", ans: true, feedback: "involved 是「涉及在內的、有關的、參與的」。" },
-    { type: "句型搭配", word: "involved", show: "I was ______ in the training program. / 填入：suitable", ans: false, feedback: "應填入 involved。" },
-    { type: "單字辨析", word: "a <u><b>regularly</b></u> updated list", show: "定期地", ans: true, feedback: "regularly 是「定期地」。" },
-    { type: "句型搭配", word: "regularly", show: "a ______ updated list / 填入：regularly", ans: true, feedback: "應填入 regularly。" },
-    { type: "單字辨析", word: "apply for a <u><b>scholarship</b></u>", show: "實習機會", ans: false, feedback: "scholarship 是「獎學金」。" },
-    { type: "句型搭配", word: "scholarship", show: "apply for a ______ / 填入：scholarship", ans: true, feedback: "應填入 scholarship。" },
-    { type: "單字辨析", word: "The flight will depart <u><b>shortly</b></u>.", show: "立刻、不久", ans: true, feedback: "shortly 是「立刻、不久」。" },
-    { type: "句型搭配", word: "shortly", show: "The flight will depart ______ . / 填入：complex", ans: false, feedback: "應填入 shortly。" },
-    { type: "單字辨析", word: "<u><b>automobile</b></u> manufacturing", show: "汽車製造業", ans: true, feedback: "automobile 是「汽車」。" },
-    { type: "句型搭配", word: "automobile", show: "______ manufacturing / 填入：automobile", ans: true, feedback: "應填入 automobile。" }
+    // 276. basis (辨析: True / 句型: False)
+    { id: "basis", type: "單字辨析", word: "pay on a monthly <u><b>basis</b></u>", show: "基準、根據", ans: true, feedback: "basis 是名詞「基準、根據」。" },
+    { id: "basis", type: "句型搭配", show: "pay on a monthly ______ / 填入：complex", ans: false, feedback: "應填入 basis。" },
+
+    // 277. complex (辨析: False / 句型: True)
+    { id: "complex", type: "單字辨析", word: "build a sports <u><b>complex</b></u>", show: "高興的", ans: false, feedback: "complex 是名詞「綜合設施」。" },
+    { id: "complex", type: "句型搭配", show: "build a sports ______ / 填入：complex", ans: true, feedback: "應填入 complex。" },
+
+    // 278. delighted (辨析: True / 句型: False)
+    { id: "delighted", type: "單字辨析", word: "The team was <u><b>delighted</b></u> to win the award.", show: "高興的", ans: true, feedback: "delighted 是形容詞「高興的」。" },
+    { id: "delighted", type: "句型搭配", show: "The team was ______ to win the award. / 填入：willing", ans: false, feedback: "應填入 delighted。" },
+
+    // 279. obtain (辨析: False / 句型: True)
+    { id: "obtain", type: "單字辨析", word: "<u><b>obtain</b></u> data from the website", show: "表揚、致敬", ans: false, feedback: "obtain 是動詞「獲得」。" },
+    { id: "obtain", type: "句型搭配", show: "______ data from the website / 填入：obtain", ans: true, feedback: "應填入 obtain。" },
+
+    // 280. honor (辨析: True / 句型: False)
+    { id: "honor", type: "單字辨析", word: "<u><b>honor</b></u> outstanding employees", show: "表揚、致敬", ans: true, feedback: "honor 是動詞「表揚、致敬」。" },
+    { id: "honor", type: "句型搭配", show: "______ outstanding employees / 填入：hesitate", ans: false, feedback: "應填入 honor。" },
+
+    // 281. properly (辨析: False / 句型: True)
+    { id: "properly", type: "單字辨析", word: "<u><b>properly</b></u> handle customer complaints", show: "合適的", ans: false, feedback: "properly 是副詞「適當地」。" },
+    { id: "properly", type: "句型搭配", show: "______ handle customer complaints / 填入：properly", ans: true, feedback: "應填入 properly。" },
+
+    // 282. suitable (辨析: True / 句型: False)
+    { id: "suitable", type: "單字辨析", word: "<u><b>suitable</b></u> for long-distance travel", show: "合適的", ans: true, feedback: "suitable 是形容詞「合適的」。" },
+    { id: "suitable", type: "句型搭配", show: "______ for long-distance travel / 填入：electronic", ans: false, feedback: "應填入 suitable。" },
+
+    // 283. electronic (辨析: False / 句型: True)
+    { id: "electronic", type: "單字辨析", word: "<u><b>electronic</b></u> payment systems", show: "慷慨大方的", ans: false, feedback: "electronic 是形容詞「電子(化)的、透過電子操作的」。" },
+    { id: "electronic", type: "句型搭配", show: "______ payment systems / 填入：electronic", ans: true, feedback: "應填入 electronic。" },
+
+    // 284. finalize (辨析: True / 句型: False)
+    { id: "finalize", type: "單字辨析", word: "<u><b>finalize</b></u> a contract", show: "定案", ans: true, feedback: "finalize 是動詞「定案」。" },
+    { id: "finalize", type: "句型搭配", show: "______ a contract / 填入：worth", ans: false, feedback: "應填入 finalize。" },
+
+    // 285. generous (辨析: False / 句型: True)
+    { id: "generous", type: "單字辨析", word: "make a <u><b>generous</b></u> donation to a charity", show: "準備", ans: false, feedback: "generous 是形容詞「慷慨大方的」。" },
+    { id: "generous", type: "句型搭配", show: "make a ______ donation to a charity / 填入：generous", ans: true, feedback: "應填入 generous。" },
+
+    // 286. preparation (辨析: True / 句型: False)
+    { id: "preparation", type: "單字辨析", word: "in <u><b>preparation</b></u> for the annual meeting", show: "準備", ans: true, feedback: "preparation 是名詞「準備」。" },
+    { id: "preparation", type: "句型搭配", show: "in ______ for the annual meeting / 填入：basis", ans: false, feedback: "應填入 preparation。" },
+
+    // 287. duty (辨析: False / 句型: True)
+    { id: "duty", type: "單字辨析", word: "the main <u><b>duties</b></u> of a manager", show: "掙得、搏得", ans: false, feedback: "duty 是名詞「職責」。" },
+    { id: "duty", type: "句型搭配", show: "the main ______ of a manager / 填入：duties", ans: true, feedback: "應填入 duties。" },
+
+    // 288. earn (辨析: True / 句型: False)
+    { id: "earn", type: "單字辨析", word: "<u><b>earn</b></u> customer trust", show: "掙得、搏得;賺錢", ans: true, feedback: "earn 是動詞「掙得、搏得;賺錢」。" },
+    { id: "earn", type: "句型搭配", show: "______ customer trust / 填入：fund", ans: false, feedback: "應填入 earn。" },
+
+    // 289. willing (辨析: False / 句型: True)
+    { id: "willing", type: "單字辨析", word: "Are you <u><b>willing</b></u> to relocate for the job?", show: "值得...的", ans: false, feedback: "willing 是形容詞「願意的」。" },
+    { id: "willing", type: "句型搭配", show: "Are you ______ to relocate for the job? / 填入：willing", ans: true, feedback: "應填入 willing。" },
+
+    // 290. worth (辨析: True / 句型: False)
+    { id: "worth", type: "單字辨析", word: "The movie is <u><b>worth</b></u> watching.", show: "值得...的", ans: true, feedback: "worth 是形容詞「值得...的」。" },
+    { id: "worth", type: "句型搭配", show: "The movie is ______ watching. / 填入：delighted", ans: false, feedback: "應填入 worth。" },
+
+    // 291. fund (辨析: False / 句型: True)
+    { id: "fund", type: "單字辨析", word: "a project <u><b>funded</b></u> by the government", show: "一夜的;隔日的", ans: false, feedback: "fund 是動詞「出資」。" },
+    { id: "fund", type: "句型搭配", show: "a project ______ by the government / 填入：funded", ans: true, feedback: "應填入 funded。" },
+
+    // 292. overnight (辨析: True / 句型: False)
+    { id: "overnight", type: "單字辨析", word: "free <u><b>overnight</b></u> delivery", show: "一夜的;隔日的", ans: true, feedback: "overnight 是形容詞「一夜的;隔日的」。" },
+    { id: "overnight", type: "句型搭配", show: "free ______ delivery / 填入：shortly", ans: false, feedback: "應填入 overnight。" },
+
+    // 293. particularly (辨析: False / 句型: True)
+    { id: "particularly", type: "單字辨析", word: "<u><b>particularly</b></u> focus on customer needs", show: "方面", ans: false, feedback: "particularly 是副詞「特別、尤其」。" },
+    { id: "particularly", type: "句型搭配", show: "______ focus on customer needs / 填入：particularly", ans: true, feedback: "應填入 particularly。" },
+
+    // 294. aspect (辨析: True / 句型: False)
+    { id: "aspect", type: "單字辨析", word: "every <u><b>aspect</b></u> of a project", show: "方面", ans: true, feedback: "aspect 是名詞「方面」。" },
+    { id: "aspect", type: "句型搭配", show: "every ______ of a project / 填入：scholarship", ans: false, feedback: "應填入 aspect。" },
+
+    // 295. hesitate (辨析: False / 句型: True)
+    { id: "hesitate", type: "單字辨析", word: "Please do not <u><b>hesitate</b></u> to contact us.", show: "涉及在內的", ans: false, feedback: "hesitate 是動詞「猶豫」。" },
+    { id: "hesitate", type: "句型搭配", show: "Please do not ______ to contact us. / 填入：hesitate", ans: true, feedback: "應填入 hesitate。" },
+
+    // 296. involved (辨析: True / 句型: False)
+    { id: "involved", type: "單字辨析", word: "I was <u><b>involved</b></u> in the training program.", show: "涉及在內的、有關的", ans: true, feedback: "involved 是形容詞「涉及在内的、有關的」。" },
+    { id: "involved", type: "句型搭配", show: "I was ______ in the training program. / 填入：automobile", ans: false, feedback: "應填入 involved。" },
+
+    // 297. regularly (辨析: False / 句型: True)
+    { id: "regularly", type: "單字辨析", word: "a <u><b>regularly</b></u> updated list", show: "獎學金", ans: false, feedback: "regularly 是副詞「定期地」。" },
+    { id: "regularly", type: "句型搭配", show: "a ______ updated list / 填入：regularly", ans: true, feedback: "應填入 regularly。" },
+
+    // 298. scholarship (辨析: True / 句型: False)
+    { id: "scholarship", type: "單字辨析", word: "apply for a <u><b>scholarship</b></u>", show: "獎學金", ans: true, feedback: "scholarship 是名詞「獎學金」。" },
+    { id: "scholarship", type: "句型搭配", show: "apply for a ______ / 填入：preparation", ans: false, feedback: "應填入 scholarship。" },
+
+    // 299. shortly (辨析: False / 句型: True)
+    { id: "shortly", type: "單字辨析", word: "The flight will depart <u><b>shortly</b></u>.", show: "汽車", ans: false, feedback: "shortly 是副詞「立刻、不久」。" },
+    { id: "shortly", type: "句型搭配", show: "The flight will depart ______. / 填入：shortly", ans: true, feedback: "應填入 shortly。" },
+
+    // 300. automobile (辨析: True / 句型: False)
+    { id: "automobile", type: "單字辨析", word: "<u><b>automobile</b></u> manufacturing", show: "汽車", ans: true, feedback: "automobile 是名詞「汽車」。" },
+    { id: "automobile", type: "句型搭配", show: "______ manufacturing / 填入：overnight", ans: false, feedback: "應填入 automobile。" }
 ];
 
 let questions = [];
@@ -199,9 +248,36 @@ let score = 0;
 let userHistoryList = []; 
 
 function initQuiz() {
-    const shuffled = [...rawData].sort(() => 0.5 - Math.random());
-    questions = shuffled.slice(0, 5);
-    currentIndex = 0; score = 0; userHistoryList = [];
+    const groups = {};
+    rawData.forEach(item => {
+        if (!groups[item.id]) groups[item.id] = [];
+        groups[item.id].push(item);
+    });
+
+    const wordIds = Object.keys(groups);
+    const shuffledIds = wordIds.sort(() => 0.5 - Math.random()).slice(0, 5);
+
+    // 強制混合題型：5 題中「單字辨析」與「句型搭配」各半，不可全同
+    const typesToAssign = ["單字辨析", "單字辨析", "句型搭配", "句型搭配", Math.random() > 0.5 ? "單字辨析" : "句型搭配"];
+    typesToAssign.sort(() => 0.5 - Math.random());
+
+    let selectedQuestions = [];
+    shuffledIds.forEach((id, index) => {
+        const targetType = typesToAssign[index];
+        const questionOfTargetType = groups[id].find(q => q.type === targetType);
+        if (questionOfTargetType) {
+            selectedQuestions.push(questionOfTargetType);
+        } else {
+            const randomPick = groups[id][Math.floor(Math.random() * groups[id].length)];
+            selectedQuestions.push(randomPick);
+        }
+    });
+
+    questions = selectedQuestions.sort(() => 0.5 - Math.random());
+    
+    currentIndex = 0; 
+    score = 0; 
+    userHistoryList = [];
     document.getElementById('main-banner').classList.remove('compact');
     document.getElementById('intro-area').style.display = 'block';
     document.getElementById('quiz-section').style.display = 'block';
@@ -217,13 +293,15 @@ function loadQuestion() {
     document.getElementById('type-tag').innerText = q.type;
     const wordEl = document.getElementById('word');
     
+    // 清空並重新渲染，防範跨題型 undefined 污染與殘留問題
     if (q.type === "句型搭配") {
-        wordEl.style.display = 'none';
-        document.getElementById('content').innerText = q.show;
+        wordEl.style.display = 'none'; 
+        wordEl.innerHTML = ''; 
+        document.getElementById('content').innerText = q.show; 
     } else {
         wordEl.style.display = 'block';
         wordEl.innerHTML = q.word; 
-        document.getElementById('content').innerText = `中文意思：${q.show}`;
+        document.getElementById('content').innerText = `核心單字中文意思：${q.show}`;
     }
     
     document.getElementById('feedback').style.display = 'none';
@@ -237,7 +315,13 @@ function handleAnswer(userAns) {
     document.querySelectorAll('.btn-group button').forEach(b => b.disabled = true);
     feedback.style.display = 'block';
     const isCorrect = (userAns === q.ans);
-    userHistoryList.push({ word: q.word, isCorrect: isCorrect, feedback: q.feedback });
+    
+    userHistoryList.push({ 
+        word: q.type === "句型搭配" ? "句型搭配" : q.word, 
+        isCorrect: isCorrect, 
+        feedback: q.feedback 
+    });
+    
     if (isCorrect) {
         score += 20;
         feedback.innerText = "✅ " + q.feedback;
@@ -265,11 +349,11 @@ function showResult() {
     const now = new Date();
     const timeStr = `${now.getMonth() + 1}/${now.getDate()} ${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
 
-    // 使用獨立的 EP12 儲存欄位
-    let history = JSON.parse(localStorage.getItem('toeic_history_ep12')) || [];
+    // 使用關卡專屬快取緩存 Key 值 (EP12 版)
+    let history = JSON.parse(localStorage.getItem('toeic_history_ep12_v1')) || [];
     history.unshift({ score: score, time: timeStr });
     if(history.length > 5) history.pop();
-    localStorage.setItem('toeic_history_ep12', JSON.stringify(history));
+    localStorage.setItem('toeic_history_ep12_v1', JSON.stringify(history));
     renderHistoryList(history);
 
     document.getElementById('review-list').innerHTML = userHistoryList.map(item => `
@@ -296,7 +380,7 @@ function renderHistoryList(history) {
 
 function confirmClear() {
     if (confirm("確定要清除所有練習紀錄嗎？")) {
-        localStorage.removeItem('toeic_history_ep12');
+        localStorage.removeItem('toeic_history_ep12_v1');
         renderHistoryList([]);
     }
 }
